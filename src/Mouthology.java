@@ -5,6 +5,7 @@ public class Mouthology {
     //InnerBuilder метод!!!
 
     public static void main(String[] args) {
+        Person.Builder builderProfessor = Person.builder();
          Person professor = Person.builder()
                  .setProfession("professor")
                  .setBiology(true)
@@ -14,6 +15,9 @@ public class Mouthology {
                  .getPerson();
         System.out.println(professor.isBiology());
 
+        professor = builderProfessor.setEscapology(true).getPerson();
+        System.out.println(professor.isEscapology());
+
         Person sailor = Person.builder()
                 .setCrocodilogy(true)
                 .setEscapology(true)
@@ -21,7 +25,7 @@ public class Mouthology {
                 .setSharkology(true)
                 .getPerson();
         System.out.println(sailor.isCrocodilogy());
-        
+
     }
 }
 
