@@ -1,7 +1,25 @@
 package Lesson07_03_2024;
 
+//fabric pattern
+// фабричный шаблон
+
 public class PoundOfButter {
     public static void main(String[] args) {
+        IProducer farmer = new Farmer();
+        IProducer baker = new Baker();
+
+        IProduct bread = baker.make(1);
+        IProduct butter = farmer.make(bread.getWeight());
+
+        IProducer judge = new Judge();
+        IProduct decision = judge.make(0);
+
+        System.out.println("A farmer sold butter to a baker");
+        System.out.format("The weight of the butter is %.2f pounds \n",butter.getWeight());
+        System.out.println("The baker took the farmer to court");
+        System.out.println("The farmer put the bread on the scale and weight the bread");
+        System.out.format("The weight of the bread is also %.2f pounds \n",bread.getWeight());
+        System.out.format(((Decision)decision).getDecision());
 
     }
 }
@@ -44,5 +62,47 @@ class Butter implements IProduct {
     public void setWeight(double weight) {
         this.weight = weight;
 
+    }
+}
+
+class Farmer implements IProducer {
+
+    @Override
+    public IProduct make(double weight) {
+        IProduct butter = new Butter();
+        butter.setWeight(weight);
+        return butter;
+    }
+}
+
+class Baker implements IProducer {
+
+    @Override
+    public IProduct make(double weight) {
+        IProduct bread = new Bread();
+        bread.setWeight(Math.random() * 0.1 + 0.9);
+        return bread;
+    }
+}
+
+class Decision implements IProduct {
+    private String decision = "Don’t try to cheat on others";
+
+    public String getDecision() {
+        return decision;
+    }
+
+    public double getWeight() {
+        return 0;
+    }
+
+    public void setWeight(double weight) {
+    }
+}
+
+class Judge implements IProducer {
+    public IProduct make(double weight) {
+        IProduct decision = new Decision();
+        return decision;
     }
 }
