@@ -1,7 +1,7 @@
 package Lesson07_03_2024;
 
 //fabric pattern
-// фабричный шаблон
+//фабричный шаблон
 
 public class PoundOfButter {
     public static void main(String[] args) {
